@@ -1,10 +1,10 @@
 import { Box, Divider, Title } from "@mantine/core";
-import { Transaction } from "../interfaces/interfaces";
-import { Transactions } from "./Transactions";
-interface Props {
-  transactions: Transaction[];
-}
-export function Expenses({ transactions }: Props) {
+import { useContext } from "react";
+import { TransactionCtx } from "../context/TransactionContext";
+
+export function Expenses() {
+  const { transactions } = useContext(TransactionCtx);
+
   const amounts = transactions.map((transaction) => transaction.amount);
   const income = amounts
     .filter((amount) => amount > 0)

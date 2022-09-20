@@ -13,6 +13,7 @@ import { Transaction } from "./interfaces/interfaces";
 import { useState } from "react";
 import "./App.css";
 import { ThemeToggle } from "./components/ThemeToggle";
+import { TransactionProvider } from "./context/TransactionContext";
 
 const initialTransactions: Transaction[] = [
   {
@@ -35,16 +36,7 @@ function App() {
   const [colorScheme, setColorScheme] = useState<ColorScheme>("light");
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
-  const [transactions, setTransactions] =
-    useState<Transaction[]>(initialTransactions);
 
-  function addTransaction(transaction: Transaction) {
-    setTransactions([...transactions, transaction]);
-  }
-  function deleteTransaction(id: number) {
-    const filtered = transactions.filter((t) => t.id !== id);
-    setTransactions(filtered);
-  }
   return (
     <ColorSchemeProvider
       colorScheme={colorScheme}
@@ -57,17 +49,16 @@ function App() {
         withNormalizeCSS
         withGlobalStyles
       >
-        <Box sx={{ width: "300px", margin: "20px auto" }}>
-          <ThemeToggle />
-          <Title>Expense Tracker</Title>
-          <Balance transactions={transactions} />
-          <Expenses transactions={transactions} />
-          <Transactions
-            deleteTransaction={deleteTransaction}
-            transactions={transactions}
-          />
-          <AddTransaction addTransaction={addTransaction} />
-        </Box>
+        <TransactionProvider>
+          <Box sx={{ width: "300px", margin: "20px auto" }}>
+            <ThemeToggle />
+            <Title>Expense Tracker</Title>
+            <Balance />
+            <Expenses />
+            <Transactions />
+            <AddTransaction />
+          </Box>
+        </TransactionProvider>
       </MantineProvider>
     </ColorSchemeProvider>
   );

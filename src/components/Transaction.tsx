@@ -1,4 +1,6 @@
 import { createStyles } from "@mantine/core";
+import { useContext } from "react";
+import { TransactionCtx } from "../context/TransactionContext";
 import { Transaction as TransactionInterface } from "../interfaces/interfaces";
 const useStyles = createStyles((theme) => ({
   item: {
@@ -26,10 +28,10 @@ const useStyles = createStyles((theme) => ({
 }));
 interface Props {
   transaction: TransactionInterface;
-  deleteTransaction: (id: number) => void;
 }
-export function Transaction({ transaction, deleteTransaction }: Props) {
+export function Transaction({ transaction }: Props) {
   const { classes, cx } = useStyles();
+  const { deleteTransaction } = useContext(TransactionCtx);
 
   return (
     <li

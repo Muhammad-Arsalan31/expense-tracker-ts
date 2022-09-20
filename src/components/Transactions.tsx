@@ -1,4 +1,6 @@
 import { Box, Title, Divider, createStyles, ScrollArea } from "@mantine/core";
+import { useContext } from "react";
+import { TransactionCtx } from "../context/TransactionContext";
 import { Transaction } from "../interfaces/interfaces";
 import { Transaction as TransactionComponent } from "./Transaction";
 
@@ -27,12 +29,9 @@ const useStyles = createStyles({
   },
 });
 
-interface Props {
-  transactions: Transaction[];
-  deleteTransaction: (id: number) => void;
-}
-export function Transactions({ transactions, deleteTransaction }: Props) {
+export function Transactions() {
   const { classes } = useStyles();
+  const { transactions } = useContext(TransactionCtx);
 
   return (
     <Box>
@@ -42,7 +41,6 @@ export function Transactions({ transactions, deleteTransaction }: Props) {
         <ul className={classes.list}>
           {transactions.map((transaction: Transaction) => (
             <TransactionComponent
-              deleteTransaction={deleteTransaction}
               key={transaction.id}
               transaction={transaction}
             />

@@ -1,10 +1,11 @@
 import { Box, Button, Divider, TextInput, Title } from "@mantine/core";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { TransactionCtx } from "../context/TransactionContext";
 import { Transaction } from "../interfaces/interfaces";
-interface Props {
-  addTransaction: (transaction: Transaction) => void;
-}
-export function AddTransaction({ addTransaction }: Props) {
+
+export function AddTransaction() {
+  const { addTransaction } = useContext(TransactionCtx);
+
   const [title, setTitle] = useState<string | undefined>();
   const [amount, setAmount] = useState<string | undefined>();
   function add() {

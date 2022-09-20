@@ -1,11 +1,9 @@
 import { Title } from "@mantine/core";
-import { Transaction } from "../interfaces/interfaces";
+import { useContext } from "react";
+import { TransactionCtx } from "../context/TransactionContext";
 
-interface Props {
-  transactions: Transaction[];
-}
-
-export function Balance({ transactions }: Props) {
+export function Balance() {
+  const { transactions } = useContext(TransactionCtx);
   const amounts = transactions.map((transaction) => transaction.amount);
 
   const total = amounts.reduce((acc, item) => (acc += item), 0);
