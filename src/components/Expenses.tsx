@@ -28,7 +28,7 @@ export function Expenses() {
       >
         <div>
           <Title order={5}>Income</Title>
-          <Title order={3} style={{ color: "lightgreen" }}>
+          <Title order={3} style={{ color: "#3cb043" }}>
             ${income}
           </Title>
         </div>

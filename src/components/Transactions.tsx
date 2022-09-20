@@ -37,7 +37,7 @@ export function Transactions() {
     <Box>
       <Title order={5}>History</Title>
       <Divider />
-      <ScrollArea.Autosize maxHeight={300} mx="auto">
+      <ScrollArea.Autosize maxHeight={220} offsetScrollbars mx="auto">
         <ul className={classes.list}>
           {transactions.map((transaction: Transaction) => (
             <TransactionComponent
